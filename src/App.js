@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+// variabili
+// primitive => 3 'pippo' true
+// reference => array o oggetto o funzioni
+import "./App.css";
+import { FormInput } from "./components/FormInput";
+import { useCallback, useState, useRef, useEffect } from "react";
 
 function App() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const handleChangeName = useCallback(
+    (e) => {
+      setName(e.target.value);
+      //... fetch
+    },
+    [setName]
+  );
+  const handleChangeDescription = useCallback(
+    (e) => {
+      setDescription(e.target.value);
+    },
+    [setDescription]
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <FormInput value={name} onChange={handleChangeName} tag={"name"} />
+      <FormInput
+        value={description}
+        onChange={handleChangeDescription}
+        tag={"description"}
+      />
     </div>
   );
 }
